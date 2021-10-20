@@ -1,42 +1,53 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
+  <div class="hello">    
+    <p v-if="!showNext">
+      你在一片沙滩上睁开双眼,不知道自己是谁,为什么会在这里
+      <br />
+      你举目四望,你的身后是大海,面前是被迷雾笼罩的森林,以及一块石碑
+      <br />
+      你看向石碑,石碑上刻着
+      <br />
+      <br />
+      <b>【向着迷雾深处前进吧，那里有一切的答案,以及回家之路】</b>
+      <br />
+      <br />
+      <button @click="setUserName">触摸</button>
     </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <div v-else>
+      <p>
+        你想起了自己的名字
+        <span>【{{ userName }}】</span>,同时眼前的迷雾涌动,形成了三条通道
+        <br />
+        没什么好犹豫的了,前进吧
+      </p>
+      <h2><router-link to="charcter">前进</router-link></h2>
+    </div>
   </div>
 </template>
 
 <script>
+import store from "../store/index";
+import { ref } from "vue";
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
-  }
-}
+    user: String,
+  },
+  setup() {
+    const userName = ref("无名之人");
+    const showNext = ref(false);
+    function setUserName() {
+      var username = prompt("你的名字");
+      if (username !== null && username.length > 0) {
+        store.commit("chageUserName", username);
+        this.userName = username;
+        this.showNext = true;
+      }
+    }
+    return { userName, showNext, setUserName };
+  },
+  methods: {},
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

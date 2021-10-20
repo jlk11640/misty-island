@@ -1,6 +1,22 @@
-{
-    "Warrior":{
-        "desc":"",
-        "":""
+[
+    {
+        "id": "Warrior",
+        "name": "战士",
+        "desc": "无论是攻击还是防御,都游刃有余",
+        "life": 80,
+        "cost": 3,
+        "feature": "战斗结束时,回复6点生命值",
+        "image": "Warrior.jpg",
+        "selectable": true
+    },
+    {
+        "id": "Thief",
+        "name": "盗贼",
+        "selectable": false
+    },
+    {
+        "id": "Wizzard",
+        "name": "巫师",
+        "selectable": false
     }
-}
+]
